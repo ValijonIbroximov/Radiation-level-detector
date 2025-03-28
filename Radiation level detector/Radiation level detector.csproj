@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>Radiation_level_detector</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="map.png" />
+    <None Remove="MV.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GMap.NET.WinForms" Version="2.1.7" />
+    <PackageReference Include="GMap.NET.WinPresentation" Version="2.1.7" />
+    <PackageReference Include="System.IO.Ports" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="map.png" />
+    <Resource Include="MV.png" />
+  </ItemGroup>
+
+</Project>

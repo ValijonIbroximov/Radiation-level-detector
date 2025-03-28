@@ -1,0 +1,72 @@
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+
+#define GEIGER_PIN 2   // Geiger Counter signal pini
+#define BUZZER_PIN 9   // Buzzer chiqish pini
+
+LiquidCrystal_I2C lcd(0x27, 16, 2); // LCD 16x2 I2C adresi: 0x27 yoki 0x3F
+
+volatile unsigned long pulseCount = 0;  // Pulslari sanash
+unsigned long previousMillis = 0;
+const long interval = 500;  // 1 soniya
+float radiationLevel = 0.0; // µSv/h
+float smoothedRadiation = 0.0; // Silliqlangan radiatsiya darajasi
+
+const float conversionFactor = 0.00812037; // CPM -> µSv/h
+const float alertThreshold = 0.003; // µSv/h bo'yicha ogohlantirish
+
+// ISR - Interrupt (har impulsda chaqiriladi)
+void countPulse() {  
+    pulseCount++;
+}
+
+void setup() {
+    Serial.begin(115200);
+    pinMode(GEIGER_PIN, INPUT);
+    pinMode(BUZZER_PIN, OUTPUT);
+
+    attachInterrupt(digitalPinToInterrupt(GEIGER_PIN), countPulse, RISING); // ISR funksiyasini ulash
+
+    lcd.init();
+    lcd.backlight();
+    lcd.setCursor(0, 0);
+    lcd.print(" RADIATION LEVEL");
+    lcd.setCursor(0, 1);
+    lcd.print("    DETECTOR    ");
+    delay(1000);
+}
+
+void loop() {
+    unsigned long currentMillis = millis();
+    
+    if (currentMillis - previousMillis >= interval) {
+        previousMillis = currentMillis;
+
+        float CPM = pulseCount * 60; // 1 soniya ichidagi impulslar 60 ga ko‘paytirildi
+        pulseCount = 0;  // Hisobni yangilash
+
+        // µSv/h hisoblash
+        radiationLevel = CPM * conversionFactor;
+
+        // **Sezuvchanlikni oshirish uchun o'rtacha olish**
+        smoothedRadiation = (smoothedRadiation * 90 + radiationLevel) / 100;
+
+
+        // LCD ekranida chiqarish
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("RADIATION LEVEL:");
+        lcd.setCursor(0, 1);
+        lcd.print(smoothedRadiation * 1000, 6);
+
+        // Serial monitor uchun chiqarish
+        Serial.println(smoothedRadiation * 1000, 6);
+
+        // **Ogohlantirish tizimi**
+        if (smoothedRadiation >= alertThreshold) {
+            tone(BUZZER_PIN, 1000);
+            delay(200);
+            noTone(BUZZER_PIN);
+        }
+    }
+}
