@@ -8,142 +8,154 @@
         WindowState="Maximized"
         Title="Radiation level detector" Height="720" Width="1280" 
         Icon="/MV.png">
-    
+
     <Grid>
         <Image Source="map.png" Stretch="Fill"/>
 
-        <TextBlock x:Name="NotificationText" 
-           HorizontalAlignment="Center" 
-           VerticalAlignment="Top"
-           Margin="0,20,0,0"
-           FontSize="20"
-           Foreground="White"
-           Background="#AA333333"
-           Padding="20,10"
-           Visibility="Collapsed"
-           TextWrapping="Wrap"
-           TextAlignment="Center"/>
-        
-        
+        <!-- Port tanlash uchun ComboBox -->
+        <ComboBox x:Name="portComboBox" Width="200" Height="30" Margin="20,20,0,0"
+                  HorizontalAlignment="Left" VerticalAlignment="Top"
+                  SelectionChanged="portComboBox_SelectionChanged"/>
 
-        <Grid x:Name="AnimationGrid1" Width="auto" Height="auto" Margin="846,38,974,926"
-      HorizontalAlignment="Center"
-      VerticalAlignment="Center">
+        <!-- Olingan qiymatni chiqarish -->
+        <TextBlock x:Name="currentValueText" FontSize="20"
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   Foreground="Red" Margin="20,60,0,0"/>
+
+        <TextBlock x:Name="NotificationText" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top"
+                   Margin="0,20,0,0"
+                   FontSize="20"
+                   Foreground="White"
+                   Background="#AA333333"
+                   Padding="20,10"
+                   Visibility="Collapsed"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center"/>
+
+        <!-- Sensor 1 -->
+        <Grid x:Name="AnimationGrid1" Width="100" Height="100" 
+              HorizontalAlignment="Left" VerticalAlignment="Top"
+              Margin="200,100,0,0">
             <Ellipse x:Name="GlowEffect1"
-     Width="100" Height="100"
-     Fill="#efeb24"
-     Opacity="0.3"
-     RenderTransformOrigin="0.5,0.5">
+                     Width="100" Height="100"
+                     Fill="#efeb24"
+                     Opacity="0.3"
+                     RenderTransformOrigin="0.5,0.5">
                 <Ellipse.RenderTransform>
                     <ScaleTransform x:Name="glowScale1" ScaleX="0.9" ScaleY="0.9"/>
                 </Ellipse.RenderTransform>
             </Ellipse>
             <Ellipse x:Name="Circle1"
-     Width="50" Height="50"
-     Fill="#00ff00"
-     Stroke="Transparent"
-     RenderTransformOrigin="0.5,0.5">
+                     Width="50" Height="50"
+                     Fill="#00ff00"
+                     Stroke="Transparent"
+                     RenderTransformOrigin="0.5,0.5">
                 <Ellipse.RenderTransform>
                     <ScaleTransform x:Name="scaleTransform1" ScaleX="0.9" ScaleY="0.9"/>
                 </Ellipse.RenderTransform>
             </Ellipse>
             <TextBlock x:Name="PercentText1"
-       Text="1%"
-       FontSize="14"
-       FontWeight="Bold"
-       Foreground="blue"
-       HorizontalAlignment="Center"
-       VerticalAlignment="Center"/>
+                       Text="0%"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Foreground="blue"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
         </Grid>
 
-        <Grid x:Name="AnimationGrid2" Width="auto" Height="auto" Margin="846,38,974,926"
-      HorizontalAlignment="Center"
-      VerticalAlignment="Center">
+        <!-- Sensor 2 -->
+        <Grid x:Name="AnimationGrid2" Width="100" Height="100"
+              HorizontalAlignment="Left" VerticalAlignment="Top"
+              Margin="400,300,0,0">
             <Ellipse x:Name="GlowEffect2"
-     Width="100" Height="100"
-     Fill="#efeb24"
-     Opacity="0.3"
-     RenderTransformOrigin="0.5,0.5">
+                     Width="100" Height="100"
+                     Fill="#efeb24"
+                     Opacity="0.3"
+                     RenderTransformOrigin="0.5,0.5">
                 <Ellipse.RenderTransform>
                     <ScaleTransform x:Name="glowScale2" ScaleX="0.9" ScaleY="0.9"/>
                 </Ellipse.RenderTransform>
             </Ellipse>
             <Ellipse x:Name="Circle2"
-     Width="50" Height="50"
-     Fill="#00ff00"
-     Stroke="Transparent"
-     RenderTransformOrigin="0.5,0.5">
+                     Width="50" Height="50"
+                     Fill="#00ff00"
+                     Stroke="Transparent"
+                     RenderTransformOrigin="0.5,0.5">
                 <Ellipse.RenderTransform>
                     <ScaleTransform x:Name="scaleTransform2" ScaleX="0.9" ScaleY="0.9"/>
                 </Ellipse.RenderTransform>
             </Ellipse>
             <TextBlock x:Name="PercentText2"
-       Text="2%"
-       FontSize="14"
-       FontWeight="Bold"
-       Foreground="blue"
-       HorizontalAlignment="Center"
-       VerticalAlignment="Center"/>
+                       Text="0%"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Foreground="blue"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
         </Grid>
 
-        <Grid x:Name="AnimationGrid3" Width="auto" Height="auto" Margin="822,768,998,196"
-      HorizontalAlignment="Center"
-      VerticalAlignment="Center">
+        <!-- Sensor 3 -->
+        <Grid x:Name="AnimationGrid3" Width="100" Height="100"
+              HorizontalAlignment="Left" VerticalAlignment="Top"
+              Margin="300,500,0,0">
             <Ellipse x:Name="GlowEffect3"
-Width="100" Height="100"
-Fill="#efeb24"
-Opacity="0.3"
-RenderTransformOrigin="0.5,0.5">
+                     Width="100" Height="100"
+                     Fill="#efeb24"
+                     Opacity="0.3"
+                     RenderTransformOrigin="0.5,0.5">
                 <Ellipse.RenderTransform>
                     <ScaleTransform x:Name="glowScale3" ScaleX="0.9" ScaleY="0.9"/>
                 </Ellipse.RenderTransform>
             </Ellipse>
             <Ellipse x:Name="Circle3"
-Width="50" Height="50"
-Fill="#00ff00"
-Stroke="Transparent"
-RenderTransformOrigin="0.5,0.5">
+                     Width="50" Height="50"
+                     Fill="#00ff00"
+                     Stroke="Transparent"
+                     RenderTransformOrigin="0.5,0.5">
                 <Ellipse.RenderTransform>
                     <ScaleTransform x:Name="scaleTransform3" ScaleX="0.9" ScaleY="0.9"/>
                 </Ellipse.RenderTransform>
             </Ellipse>
             <TextBlock x:Name="PercentText3"
-  Text="3%"
-  FontSize="14"
-  FontWeight="Bold"
-  Foreground="blue"
-  HorizontalAlignment="Center"
-  VerticalAlignment="Center"/>
+                       Text="0%"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Foreground="blue"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
         </Grid>
 
-        <Grid x:Name="AnimationGrid" Width="auto" Height="auto" Margin="1016,180,804,784"
-      HorizontalAlignment="Center"
-      VerticalAlignment="Center">
+        <!-- Asosiy sensor -->
+        <Grid x:Name="AnimationGrid" Width="100" Height="100"
+              HorizontalAlignment="Left" VerticalAlignment="Top"
+              Margin="500,200,0,0">
             <Ellipse x:Name="GlowEffect"
-             Width="100" Height="100"
-             Fill="#efeb24"
-             Opacity="0.3"
-             RenderTransformOrigin="0.5,0.5">
+                     Width="100" Height="100"
+                     Fill="#efeb24"
+                     Opacity="0.3"
+                     RenderTransformOrigin="0.5,0.5">
                 <Ellipse.RenderTransform>
                     <ScaleTransform x:Name="glowScale" ScaleX="0.9" ScaleY="0.9"/>
                 </Ellipse.RenderTransform>
             </Ellipse>
             <Ellipse x:Name="Circle"
-             Width="50" Height="50"
-             Fill="#00ff00"
-             Stroke="Transparent"
-             RenderTransformOrigin="0.5,0.5">
+                     Width="50" Height="50"
+                     Fill="#00ff00"
+                     Stroke="Transparent"
+                     RenderTransformOrigin="0.5,0.5">
                 <Ellipse.RenderTransform>
                     <ScaleTransform x:Name="scaleTransform" ScaleX="0.9" ScaleY="0.9"/>
                 </Ellipse.RenderTransform>
             </Ellipse>
             <TextBlock x:Name="PercentText"
-               Text="0%"
-               FontSize="14"
-               FontWeight="Bold"
-               Foreground="blue"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"/>
+                       Text="0%"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Foreground="blue"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>
