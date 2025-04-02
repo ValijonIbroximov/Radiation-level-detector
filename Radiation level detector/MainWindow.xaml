@@ -34,6 +34,26 @@
                    TextWrapping="Wrap"
                    TextAlignment="Center"/>
 
+        <!-- Info Panel for Circle Hover -->
+        <!--
+        <Border x:Name="InfoPanel" 
+                Width="250" 
+                Height="120"
+                Background="#AA333333"
+                CornerRadius="10"
+                Padding="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Visibility="Collapsed">
+            <StackPanel>
+                <TextBlock x:Name="InfoName" FontSize="14" Foreground="White" FontWeight="Bold"/>
+                <TextBlock x:Name="InfoRadiation" FontSize="12" Foreground="White" Margin="0,5,0,0"/>
+                <TextBlock x:Name="InfoDanger" FontSize="12" Foreground="White" Margin="0,5,0,0"/>
+                <TextBlock x:Name="InfoCoordinates" FontSize="12" Foreground="White" Margin="0,5,0,0"/>
+                <TextBlock x:Name="InfoDistrict" FontSize="12" Foreground="White" Margin="0,5,0,0"/>
+            </StackPanel>
+        </Border>-->
+
         <!-- Sensor 1 -->
         <Grid x:Name="AnimationGrid1" Width="140" Height="140" 
               HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -126,6 +146,7 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"/>
         </Grid>
+
         <!-- Sensor 4 -->
         <Grid x:Name="AnimationGrid4" Width="140" Height="140"
               HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -186,6 +207,32 @@
                        Foreground="blue"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"/>
+
+
+
         </Grid>
+
+        <Grid x:Name="TopLayer" Panel.ZIndex="1000">
+            <Border x:Name="InfoPanel" 
+Width="auto" 
+Height="auto"
+Background="#AA333333"
+CornerRadius="10"
+Padding="10"
+HorizontalAlignment="Left"
+VerticalAlignment="Top"
+Visibility="Collapsed"
+Panel.ZIndex="1000">
+                <!-- Bu muhim qism -->
+                <StackPanel>
+                    <TextBlock x:Name="InfoName" FontSize="14" Foreground="White" FontWeight="Bold"/>
+                    <TextBlock x:Name="InfoRadiation" FontSize="12" Foreground="White" Margin="0,5,0,0"/>
+                    <TextBlock x:Name="InfoDanger" FontSize="12" Foreground="White" Margin="0,5,0,0"/>
+                    <TextBlock x:Name="InfoCoordinates" FontSize="12" Foreground="White" Margin="0,5,0,0"/>
+                    <TextBlock x:Name="InfoDistrict" FontSize="12" Foreground="White" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
     </Grid>
 </Window>

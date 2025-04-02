@@ -5,6 +5,7 @@ using System.IO.Ports;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -46,6 +47,9 @@ namespace Radiation_level_detector
 
         // Portlarni tekshirish oraligi (soniyada)
         private const int PortCheckIntervalSec = 2;
+
+        public double RadiationLevel = 0;
+        public double RadiatioPercentage = 0;
 
         // =============================================
         // UI ELEMENTLARNING JOYLASHUVI
@@ -112,6 +116,8 @@ namespace Radiation_level_detector
 
             // Boshlang'ich holatda port tanlanmaganligini ko'rsatish
             currentValueText.Text = NoPortSelectedText;
+
+            AttachMouseEventsToCircles();
         }
 
         // =============================================
@@ -402,8 +408,9 @@ namespace Radiation_level_detector
                         // 2 ta kasr bilan hisoblash
                         double percentage = Math.Round((radiationValue / MaxRadiationValue) * 100.0, 2);
                         currentValueText.Text = $"{radiationValue:F2} nSv/h";
+                        RadiationLevel = radiationValue;
                         currentRadiationValue = percentage; // Butun songa yaxlitlamasdan saqlash
-
+                        RadiatioPercentage = currentRadiationValue;
                         // UI ni yangilash
                         UpdateAllUIElements();
                     });
@@ -712,6 +719,209 @@ namespace Radiation_level_detector
             {
                 portCheckTimer.Stop();
                 portCheckTimer = null;
+            }
+        }
+
+
+        // =============================================
+        // Popup ma'lumotlar paneli
+        // =============================================
+
+        private void AttachMouseEventsToCircles()
+        {
+            // Asosiy Circle
+            Circle.MouseEnter += Circle_MouseEnter;
+            Circle.MouseLeave += Circle_MouseLeave;
+            PercentText.MouseEnter += Circle_MouseEnter;
+            PercentText.MouseLeave += Circle_MouseLeave;
+
+            // Boshqa Circle elementlari
+            Circle1.MouseEnter += Circle_MouseEnter;
+            Circle1.MouseLeave += Circle_MouseLeave;
+            PercentText1.MouseEnter += Circle_MouseEnter;
+            PercentText1.MouseLeave += Circle_MouseLeave;
+
+            Circle2.MouseEnter += Circle_MouseEnter;
+            Circle2.MouseLeave += Circle_MouseLeave;
+            PercentText2.MouseEnter += Circle_MouseEnter;
+            PercentText2.MouseLeave += Circle_MouseLeave;
+
+            Circle3.MouseEnter += Circle_MouseEnter;
+            Circle3.MouseLeave += Circle_MouseLeave;
+            PercentText3.MouseEnter += Circle_MouseEnter;
+            PercentText3.MouseLeave += Circle_MouseLeave;
+
+            Circle4.MouseEnter += Circle_MouseEnter;
+            Circle4.MouseLeave += Circle_MouseLeave;
+            PercentText4.MouseEnter += Circle_MouseEnter;
+            PercentText4.MouseLeave += Circle_MouseLeave;
+        }
+
+        // Yoki LINQ yordamida avtomatik ravishda topib qo'shish
+        private void AttachMouseEventsAutomatically()
+        {
+            // Now we can call it without parameters
+            var circles = FindVisualChildren<Ellipse>()
+                .Where(e => e.Name?.StartsWith("Circle") == true);
+
+            foreach (var circle in circles)
+            {
+                circle.MouseEnter += Circle_MouseEnter;
+                circle.MouseLeave += Circle_MouseLeave;
+            }
+        }
+
+        // Visual tree'dan elementlarni topish uchun yordamchi metod
+        // Helper method to find visual children (put this in your MainWindow class)
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj = null) where T : DependencyObject
+        {
+            if (depObj == null)
+            {
+                // If no parameter provided, use the current window as starting point
+                depObj = Application.Current.MainWindow;
+            }
+
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T t)
+                    {
+                        yield return t;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
+        }
+
+        // MouseEnter event handleri
+        private void Circle_MouseEnter(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                string elementName = string.Empty;
+                FrameworkElement element = null;
+
+                // Determine if sender is Ellipse or TextBlock
+                if (sender is Ellipse ellipse)
+                {
+                    elementName = ellipse.Name;
+                    element = ellipse;
+                }
+                else if (sender is TextBlock textBlock)
+                {
+                    elementName = textBlock.Name;
+                    element = textBlock;
+                }
+
+                if (element != null)
+                {
+                    // Sensor ma'lumotlarini aniqlash
+                    var sensorInfo = GetSensorInfo(elementName);
+
+                    // Info panelni to'ldirish
+                    InfoName.Text = $"Nom: {sensorInfo.Name}";
+                    InfoRadiation.Text = $"Radiatsiya darajasi: {sensorInfo.RadiationLevel:F2} nSv/h";
+                    InfoDanger.Text = $"Insonga xavfi darajasi: {sensorInfo.DangerPercentage:F2}%";
+                    InfoCoordinates.Text = $"Koordinatasi: {sensorInfo.Coordinates}";
+                    InfoDistrict.Text = $"Okrug: {sensorInfo.District}";
+
+                    // Panelni pozitsiyalashtirish va ustunlik berish
+                    Point mousePos = e.GetPosition(this);
+
+                    InfoPanel.Margin = new Thickness(mousePos.X + 10, mousePos.Y + 10, 0, 0);
+                    InfoPanel.Visibility = Visibility.Visible;
+
+                    // Xato haqida foydalanuvchiga xabar berish
+                    //ShowNotification(string.Empty);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"MouseEnter xatosi: {ex.Message}");
+                // Xatolik yuz berganda panelni yashirish va xatoni ko'rsatish
+                InfoPanel.Visibility = Visibility.Collapsed;
+                ShowNotification($"Xatolik: {ex.Message}");
+            }
+        }
+
+        private void Circle_MouseLeave(object sender, MouseEventArgs e)
+        {
+            InfoPanel.Visibility = Visibility.Collapsed;
+        }
+
+        // Sensor ma'lumotlarini olish uchun metod
+        private SensorInfo GetSensorInfo(string circleName)
+        {
+            // Sensor ma'lumotlaringizni qaytaradigan kod
+            // Misol uchun:
+            switch (circleName)
+            {
+                case "Circle": 
+                case "PercentText":
+                    return new SensorInfo
+                    {
+                        Name = "AKTAHI",
+                        RadiationLevel = this.RadiationLevel,
+                        DangerPercentage = this.RadiatioPercentage,
+                        Coordinates = "41.207783, 69.137821",
+                        District = "THO"
+                    };
+                case "Circle1":
+                case "PercentText1":
+                    return new SensorInfo
+                    {
+                        Name = "71186 h/q",
+                        RadiationLevel = 0,
+                        DangerPercentage = 0,
+                        Coordinates = "41.210269, 69.137290",
+                        District = "THO"
+                    };
+                case "Circle2":
+                case "PercentText2":
+                    return new SensorInfo
+                    {
+                        Name = "Markaziy aloqa uzeli",
+                        RadiationLevel = 0,
+                        DangerPercentage = 0,
+                        Coordinates = "41.20975, 69.13435",
+                        District = "THO"
+                    };
+                case "Circle3":
+                case "PercentText3":
+                    return new SensorInfo
+                    {
+                        Name = "29262 h/q",
+                        RadiationLevel = 0,
+                        DangerPercentage = 0,
+                        Coordinates = "41.199549, 69.134334",
+                        District = "THO"
+                    };
+                case "Circle4":
+                case "PercentText4":
+                    return new SensorInfo
+                    {
+                        Name = "Maxsus avariya tiklash boshqarmasi",
+                        RadiationLevel = 0,
+                        DangerPercentage = 0,
+                        Coordinates = "41.202253, 69.136931",
+                        District = "THO"
+                    };
+                // ... boshqa sensorlar
+                default:
+                    return new SensorInfo
+                    {
+                        Name = "Noma'lum",
+                        RadiationLevel = 0,
+                        DangerPercentage = 0,
+                        Coordinates = "0, 0",
+                        District = "Noma'lum"
+                    };
             }
         }
     }
