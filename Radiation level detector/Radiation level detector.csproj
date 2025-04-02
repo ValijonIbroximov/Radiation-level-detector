@@ -24,6 +24,7 @@
     <PackageReference Include="GMap.NET.WinPresentation" Version="2.1.7" />
     <PackageReference Include="RJCP.SerialPortStream" Version="3.0.1" />
     <PackageReference Include="System.IO.Ports" Version="6.0.0" />
+    <PackageReference Include="System.Management" Version="9.0.3" />
   </ItemGroup>
 
   <ItemGroup>
