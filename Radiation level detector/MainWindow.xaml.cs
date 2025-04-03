@@ -475,6 +475,7 @@ namespace Radiation_level_detector
         /// <param name="message">Ko'rsatiladigan xabar matni</param>
         private void ShowNotification(string message)
         {
+            Panel.SetZIndex(NotificationText, 1001);
             NotificationText.Text = message;
             NotificationText.Visibility = Visibility.Visible;
             notificationTimer.Start();
@@ -611,13 +612,24 @@ namespace Radiation_level_detector
             double centerY = ActualHeight * heightRatio;
 
             // Margin qiymatlarini hisoblash (manfiy bo'lmasligiga ishonch hosil qilish)
-            double leftMargin = Math.Max(0, centerX - (grid.ActualWidth / 2));
+            double leftMargin = CirclePositionX(grid, widthRatio);
             double topMargin = Math.Max(0, centerY - (grid.ActualHeight / 2));
 
             // Joylashuvni o'rnatish
             grid.Margin = new Thickness(leftMargin, topMargin, 0, 0);
             grid.HorizontalAlignment = HorizontalAlignment.Left;
             grid.VerticalAlignment = VerticalAlignment.Top;
+        }
+
+        private double CirclePositionX(Grid grid, double widthRatio)
+        {
+            double centerX = ActualWidth * widthRatio;
+            return Math.Max(0, centerX - (grid.ActualWidth / 2));
+        }
+        private double CirclePositionY(Grid grid, double heightRatio)
+        {
+            double centerY = ActualHeight * heightRatio;
+            return Math.Max(0, centerY - (grid.ActualHeight / 2));
         }
 
         /// <summary>
@@ -991,9 +1003,67 @@ namespace Radiation_level_detector
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            btnClicked = true;
-            var mouseEventArgs = new MouseEventArgs(Mouse.PrimaryDevice, 0);
-            Circle_MouseEnter(Circle, mouseEventArgs);
+            ShowInfo(Circle);
+        }
+        private void Button1_Click(object sender, RoutedEventArgs e)
+        {
+            ShowInfo(Circle1);
+        }
+        private void Button2_Click(object sender, RoutedEventArgs e)
+        {
+            ShowInfo(Circle2);
+        }
+        private void Button3_Click(object sender, RoutedEventArgs e)
+        {
+            ShowInfo(Circle3);
+        }
+        private void Button4_Click(object sender, RoutedEventArgs e)
+        {
+            ShowInfo(Circle4);
+        }
+        private void Button5_Click(object sender, RoutedEventArgs e)
+        {
+            ShowNotification("Harbiy qismlar topilmadi!");
+        }
+
+        public void ShowInfo(FrameworkElement targetElement)
+        {
+            try
+            {
+                // Get the element name (Circle1, Circle2, etc.)
+                string elementName = targetElement.Name;
+
+                // Get sensor info
+                var sensorInfo = GetSensorInfo(elementName);
+
+                // Fill the info panel
+                InfoName.Text = $"Nom: {sensorInfo.Name}";
+                InfoRadiation.Text = $"Radiatsiya darajasi: {sensorInfo.RadiationLevel:F2} nSv/h";
+                InfoDanger.Text = $"Insonga xavfi darajasi: {sensorInfo.DangerPercentage:F2}%";
+                InfoCoordinates.Text = $"Koordinatasi: {sensorInfo.Coordinates}";
+                InfoDistrict.Text = $"Okrug: {sensorInfo.District}";
+
+                // Calculate position
+                var elementTransform = targetElement.TransformToVisual(this);
+                var elementPosition = elementTransform.Transform(new Point(0, 0));
+
+                // Position the panel to the right of the element
+                double left = elementPosition.X + 30;
+                double top = elementPosition.Y + 40;
+
+                // Apply position with animation
+                InfoPanel.Margin = new Thickness(left, top, 0, 0);
+
+                // Show with fade animation
+                InfoPanel.Visibility = Visibility.Visible;
+                InfoPanel.BeginAnimation(UIElement.OpacityProperty,
+                    new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ShowInfo error: {ex.Message}");
+                ShowNotification($"Xatolik: {ex.Message}");
+            }
         }
     }
 }
