@@ -11,6 +11,19 @@
   </PropertyGroup>
 
 	<ItemGroup>
+		<Content Include="app.ico">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<PropertyGroup>
+		<ApplicationIcon>app.ico</ApplicationIcon>
+		<AssemblyName>RadiatsiyaDarajasiMonitoringi</AssemblyName>
+		<Product>Radiation darajasi monitoringi</Product>
+		<Description>Radiatsiya darajasini monitoring qilish dasturi</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
 		<SupportedPlatform Include="windows" />
 	</ItemGroup>
 	
