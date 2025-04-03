@@ -50,6 +50,7 @@ namespace Radiation_level_detector
 
         public double RadiationLevel = 0;
         public double RadiatioPercentage = 0;
+        private bool btnClicked = false;
 
         // =============================================
         // UI ELEMENTLARNING JOYLASHUVI
@@ -484,6 +485,7 @@ namespace Radiation_level_detector
         /// </summary>
         private void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
+            SidePanel.Height = ActualHeight - 10;
             UpdateAllUIElements();
         }
 
@@ -834,7 +836,12 @@ namespace Radiation_level_detector
                     // Panelni pozitsiyalashtirish va ustunlik berish
                     Point mousePos = e.GetPosition(this);
 
-                    InfoPanel.Margin = new Thickness(mousePos.X + 10, mousePos.Y + 10, 0, 0);
+                    if (btnClicked)
+                    {
+                        InfoPanel.Margin = Circle.Margin;
+                        btnClicked = false;
+                    }
+                    else InfoPanel.Margin = new Thickness(mousePos.X + 10, mousePos.Y + 10, 0, 0);
                     InfoPanel.Visibility = Visibility.Visible;
 
                     // Xato haqida foydalanuvchiga xabar berish
@@ -923,6 +930,70 @@ namespace Radiation_level_detector
                         District = "Noma'lum"
                     };
             }
+        }
+
+
+        ////////////////////////////////////////
+        /// Buttonlar uchun
+        ////////////////////////////////////////
+        ///
+
+        private bool _isMenuOpen = false;
+
+        private void MenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            _isMenuOpen = !_isMenuOpen;
+            int start = 220, end = 0;
+            var animation = new DoubleAnimation
+            {
+                To = _isMenuOpen ? start : end,
+                Duration = TimeSpan.FromMilliseconds(200),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            SidePanelTransform.BeginAnimation(TranslateTransform.XProperty, animation);
+        }
+
+        private bool _isFiltr = false;
+
+        private void FiltrButton_Click(object sender, RoutedEventArgs e)
+        {
+            _isFiltr = !_isFiltr;
+            if (_isFiltr)
+            {
+                ((Button)sender).Content = "Filtr: Daraja";
+                filtrDaraja.Visibility = Visibility.Visible;
+                filtrOkrug.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                ((Button)sender).Content = "Filtr: Okruglar";
+                filtrDaraja.Visibility = Visibility.Collapsed;
+                filtrOkrug.Visibility = Visibility.Visible;
+            }
+        }
+
+        private bool _isTHO = false;
+
+        private void thoButton_Click(object sender, RoutedEventArgs e)
+        {
+            _isTHO = !_isTHO;
+            if (_isTHO)
+            {
+                THOmenu.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                THOmenu.Visibility = Visibility.Collapsed;
+            }
+        }
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            btnClicked = true;
+            var mouseEventArgs = new MouseEventArgs(Mouse.PrimaryDevice, 0);
+            Circle_MouseEnter(Circle, mouseEventArgs);
         }
     }
 }

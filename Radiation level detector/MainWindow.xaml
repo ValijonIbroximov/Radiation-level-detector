@@ -8,6 +8,8 @@
         WindowState="Maximized"
         Title="Radiation level detector" Height="720" Width="1280" 
         Icon="/MV.png">
+    
+    
 
     <Grid>
         <Image Source="map.png" Stretch="Fill"/>
@@ -207,9 +209,11 @@
                        Foreground="blue"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"/>
-
-
-
+            
+            
+            
+            
+            
         </Grid>
 
         <Grid x:Name="TopLayer" Panel.ZIndex="1000">
@@ -230,6 +234,65 @@ Panel.ZIndex="1000">
                     <TextBlock x:Name="InfoDanger" FontSize="12" Foreground="White" Margin="0,5,0,0"/>
                     <TextBlock x:Name="InfoCoordinates" FontSize="12" Foreground="White" Margin="0,5,0,0"/>
                     <TextBlock x:Name="InfoDistrict" FontSize="12" Foreground="White" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="MenuAndTable" Panel.ZIndex="1000">
+            <Button x:Name="MenuButton" 
+                    Width="30" 
+                    Height="25"
+                    Margin="10,10,0,0"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top"
+                    Background="white"
+                    BorderBrush="gray"
+                    Click="MenuButton_Click">
+                <StackPanel>
+                    <Rectangle Fill="gray" Height="3" Width="20" Margin="0,2"/>
+                    <Rectangle Fill="gray" Height="3" Width="20" Margin="0,2"/>
+                    <Rectangle Fill="gray" Height="3" Width="20" Margin="0,2"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Side panel -->
+            <Border x:Name="SidePanel"
+                    ScrollViewer.CanContentScroll="True"
+                    Width="200"
+                    Height="654"
+                    Background="#AA333333"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="-209,40,0,0">
+                <Border.RenderTransform>
+                    <TranslateTransform x:Name="SidePanelTransform"/>
+                </Border.RenderTransform>
+                <StackPanel Margin="10">
+                    <Button Click="FiltrButton_Click" Content="Filtr: Okruglar" Background="Gray" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,10"/>
+                    <StackPanel Name="filtrOkrug" Width="200" Height="auto">
+                        <Button Click="thoButton_Click" Content="THO" Background="Bisque"/>
+                        <StackPanel Name="THOmenu" Visibility="Collapsed">
+                            <Button Click="Button_Click" HorizontalContentAlignment="Left" Content="AKTAHI"  Margin="10, 0, 0, 0"/>
+                            <Button HorizontalContentAlignment="Left" Content="71186 h/q" Margin="10, 0, 0, 0"/>
+                            <Button HorizontalContentAlignment="Left" Content="Markaziy aloqa uzeli" Margin="10, 0, 0, 0"/>
+                            <Button HorizontalContentAlignment="Left" Content="Maxsus avariya tiklash bosh." Margin="10, 0, 0, 0"/>
+                            <Button HorizontalContentAlignment="Left" Content="29262 h/q" Margin="10, 0, 0, 0"/>
+                            <Button HorizontalContentAlignment="Left" Content="Boshqa topilmadi" Background="DarkGray" Margin="10, 0, 0, 0"/>
+                        </StackPanel>
+                        <Button Content="ShHO" Background="Bisque"/>
+                        <Button Content="MHO" Background="Bisque"/>
+                        <Button Content="ShG'HO" Background="Bisque"/>
+                        <Button Content="JG'MHO" Background="Bisque"/>
+                    </StackPanel>
+
+                    <StackPanel Name="filtrDaraja" Visibility="Collapsed">
+                        <Button HorizontalContentAlignment="Left" Content="AKTAHI"  Margin="0, 0, 0, 0"/>
+                        <Button HorizontalContentAlignment="Left" Content="71186 h/q" Margin="0, 0, 0, 0"/>
+                        <Button HorizontalContentAlignment="Left" Content="Markaziy aloqa uzeli" Margin="0, 0, 0, 0"/>
+                        <Button HorizontalContentAlignment="Left" Content="Maxsus avariya tiklash bosh." Margin="0, 0, 0, 0"/>
+                        <Button HorizontalContentAlignment="Left" Content="29262 h/q" Margin="0, 0, 0, 0"/>
+                        <Button HorizontalContentAlignment="Left" Content="Boshqa topilmadi" Background="DarkGray" Margin="0, 0, 0, 0"/>
+                    </StackPanel>
                 </StackPanel>
             </Border>
         </Grid>
