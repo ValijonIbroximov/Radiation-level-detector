@@ -275,8 +275,8 @@ Panel.ZIndex="1000">
                             <Button Click="Button_Click" HorizontalContentAlignment="Left" Content="AKTAHI"  Margin="10, 0, 0, 0"/>
                             <Button Click="Button1_Click" HorizontalContentAlignment="Left" Content="71186 h/q" Margin="10, 0, 0, 0"/>
                             <Button Click="Button2_Click" HorizontalContentAlignment="Left" Content="Markaziy aloqa uzeli" Margin="10, 0, 0, 0"/>
-                            <Button Click="Button3_Click" HorizontalContentAlignment="Left" Content="Maxsus avariya tiklash bosh." Margin="10, 0, 0, 0"/>
-                            <Button Click="Button4_Click" HorizontalContentAlignment="Left" Content="29262 h/q" Margin="10, 0, 0, 0"/>
+                            <Button Click="Button4_Click" HorizontalContentAlignment="Left" Content="Maxsus avariya tiklash bosh." Margin="10, 0, 0, 0"/>
+                            <Button Click="Button3_Click" HorizontalContentAlignment="Left" Content="29262 h/q" Margin="10, 0, 0, 0"/>
                             <Button Click="Button5_Click" HorizontalContentAlignment="Left" Content="Boshqa topilmadi" Background="DarkGray" Margin="10, 0, 0, 0"/>
                         </StackPanel>
                         <Button Content="ShHO" Background="Bisque"/>
@@ -289,8 +289,8 @@ Panel.ZIndex="1000">
                         <Button Click="Button_Click" HorizontalContentAlignment="Left" Content="AKTAHI"  Margin="0, 0, 0, 0"/>
                         <Button Click="Button1_Click" HorizontalContentAlignment="Left" Content="71186 h/q" Margin="0, 0, 0, 0"/>
                         <Button Click="Button2_Click" HorizontalContentAlignment="Left" Content="Markaziy aloqa uzeli" Margin="0, 0, 0, 0"/>
-                        <Button Click="Button3_Click" HorizontalContentAlignment="Left" Content="Maxsus avariya tiklash bosh." Margin="0, 0, 0, 0"/>
-                        <Button Click="Button4_Click" HorizontalContentAlignment="Left" Content="29262 h/q" Margin="0, 0, 0, 0"/>
+                        <Button Click="Button4_Click" HorizontalContentAlignment="Left" Content="Maxsus avariya tiklash bosh." Margin="0, 0, 0, 0"/>
+                        <Button Click="Button3_Click" HorizontalContentAlignment="Left" Content="29262 h/q" Margin="0, 0, 0, 0"/>
                         <Button Click="Button5_Click" HorizontalContentAlignment="Left" Content="Boshqa topilmadi" Background="DarkGray" Margin="0, 0, 0, 0"/>
                     </StackPanel>
                 </StackPanel>

@@ -486,7 +486,7 @@ namespace Radiation_level_detector
         /// </summary>
         private void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            SidePanel.Height = ActualHeight - 10;
+            SidePanel.Height = ActualHeight - 100;
             UpdateAllUIElements();
         }
 
