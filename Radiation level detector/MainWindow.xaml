@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Radiation_level_detector"
         mc:Ignorable="d"
         WindowState="Maximized"
-        Title="Radiation darajasi monitoringi" Height="720" Width="1280" 
+        Title="AHI Dazometr" Height="720" Width="1280" 
         Icon="app.ico">
     
     

@@ -19,7 +19,7 @@
 	<PropertyGroup>
 		<ApplicationIcon>app.ico</ApplicationIcon>
 		<AssemblyName>RadiatsiyaDarajasiMonitoringi</AssemblyName>
-		<Product>Radiation darajasi monitoringi</Product>
+		<Product>AHI Dazometr</Product>
 		<Description>Radiatsiya darajasini monitoring qilish dasturi</Description>
 	</PropertyGroup>
 
