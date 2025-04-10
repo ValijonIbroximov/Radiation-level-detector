@@ -28,7 +28,7 @@ namespace Radiation_level_detector
         // =============================================
 
         // Maksimal radiatsiya qiymati (nSv/h)
-        private const double MaxRadiationValue = 1000000.0;
+        private const double MaxRadiationValue = 10000.0;
 
         // Animatsiya davomiyligi (soniyada)
         private const double AnimationDuration = 1.5;
@@ -546,6 +546,14 @@ namespace Radiation_level_detector
                 glowEffect.Fill = new SolidColorBrush(grayColor);
                 percentText.Text = "?";
                 percentText.Foreground = Brushes.White; // Qoraroq matn rangi DarkGray
+
+
+                InfoRadiation.Text = $"Radiatsiya darajasi: ? nSv/h";
+                InfoDanger.Text = $"Insonga xavfi darajasi: ? %";
+                label0.Content = $"? %";
+                label0.Background = new SolidColorBrush(grayColor);
+                label01.Content = $"? %";
+                label01.Background = new SolidColorBrush(grayColor);
             }
             else
             {
@@ -556,6 +564,13 @@ namespace Radiation_level_detector
                 glowEffect.Fill = new SolidColorBrush(color);
                 percentText.Text = $"{value:F2}%";
                 percentText.Foreground = Brushes.Blue; // Oq matn rangi
+
+                InfoRadiation.Text = $"Radiatsiya darajasi: {RadiationLevel:F2} nSv/h";
+                InfoDanger.Text = $"Insonga xavfi darajasi: {value:F2}%";
+                label0.Content = $"{value:F2}%";
+                label0.Background = new SolidColorBrush(color);
+                label01.Content = $"{value:F2}%";
+                label01.Background = new SolidColorBrush(color);
             }
         }
 

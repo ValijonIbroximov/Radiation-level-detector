@@ -269,14 +269,33 @@ Panel.ZIndex="1000">
                 </Border.RenderTransform>
                 <StackPanel Margin="10">
                     <Button Click="FiltrButton_Click" Content="Filtr: Okruglar" Background="Gray" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,10"/>
-                    <StackPanel Name="filtrOkrug" Width="200" Height="auto">
+                    <StackPanel Name="filtrOkrug" Width="180" Height="auto">
                         <Button Click="thoButton_Click" Content="THO" Background="Bisque"/>
                         <StackPanel Name="THOmenu" Visibility="Collapsed">
-                            <Button Click="Button_Click" HorizontalContentAlignment="Left" Content="AKTAHI"  Margin="10, 0, 0, 0"/>
-                            <Button Click="Button1_Click" HorizontalContentAlignment="Left" Content="71186 h/q" Margin="10, 0, 0, 0"/>
-                            <Button Click="Button2_Click" HorizontalContentAlignment="Left" Content="Markaziy aloqa uzeli" Margin="10, 0, 0, 0"/>
-                            <Button Click="Button4_Click" HorizontalContentAlignment="Left" Content="Maxsus avariya tiklash bosh." Margin="10, 0, 0, 0"/>
-                            <Button Click="Button3_Click" HorizontalContentAlignment="Left" Content="29262 h/q" Margin="10, 0, 0, 0"/>
+                            <Grid HorizontalAlignment="Left" Width="180">
+                                <Button Click="Button_Click" Width="130" HorizontalContentAlignment="Left" Content="AKTAHI"  Margin="10, 0, 40, 0"/>
+                                <Label x:Name="label0" Content="0.00%" Width="40" BorderBrush="Gray" BorderThickness="1" Height="auto" FontSize="7" HorizontalContentAlignment="Center" Background="#00ff00" FontWeight="Bold" Foreground="Blue" Margin="139, 0, 0, 0"/>
+                            </Grid>
+                            <Grid HorizontalAlignment="Left" Width="180">
+                                <Button Click="Button1_Click" Width="130" HorizontalContentAlignment="Left" Content="71186 h/q"  Margin="10, 0, 40, 0"/>
+                                <Label x:Name="label1" Content="0.00%" Width="40" BorderBrush="Gray" BorderThickness="1" Height="auto" FontSize="7" HorizontalContentAlignment="Center" Background="#00ff00" FontWeight="Bold" Foreground="Blue" Margin="139, 0, 0, 0"/>
+                            </Grid>
+                            <Grid HorizontalAlignment="Left" Width="180">
+                                <Button Click="Button2_Click" Width="130" HorizontalContentAlignment="Left" Content="Markaziy aloqa uzeli"  Margin="10, 0, 40, 0"/>
+                                <Label x:Name="label2" Content="0.00%" Width="40" BorderBrush="Gray" BorderThickness="1" Height="auto" FontSize="7" HorizontalContentAlignment="Center" Background="#00ff00" FontWeight="Bold" Foreground="Blue" Margin="139, 0, 0, 0"/>
+                            </Grid>
+                            <Grid HorizontalAlignment="Left" Width="180">
+                                <Button Click="Button4_Click" Width="130" HorizontalContentAlignment="Left" Content="Maxsus avariya tik.bosh."  Margin="10, 0, 40, 0"/>
+                                <Label x:Name="label4" Content="0.00%" Width="40" BorderBrush="Gray" BorderThickness="1" Height="auto" FontSize="7" HorizontalContentAlignment="Center" Background="#00ff00" FontWeight="Bold" Foreground="Blue" Margin="139, 0, 0, 0"/>
+                            </Grid>
+                            <Grid HorizontalAlignment="Left" Width="180">
+                                <Button Click="Button3_Click" Width="130" HorizontalContentAlignment="Left" Content="29262 h/q"  Margin="10, 0, 40, 0"/>
+                                <Label x:Name="label3" Content="0.00%" Width="40" BorderBrush="Gray" BorderThickness="1" Height="auto" FontSize="7" HorizontalContentAlignment="Center" Background="#00ff00" FontWeight="Bold" Foreground="Blue" Margin="139, 0, 0, 0"/>
+                            </Grid>
+                            <!--<Button Click="Button1_Click" HorizontalContentAlignment="Left" Content="71186 h/q" Margin="10, 0, 0, 0"/>-->
+                            <!--<Button Click="Button2_Click" HorizontalContentAlignment="Left" Content="Markaziy aloqa uzeli" Margin="10, 0, 0, 0"/>-->
+                            <!--<Button Click="Button4_Click" HorizontalContentAlignment="Left" Content="Maxsus avariya tiklash bosh." Margin="10, 0, 0, 0"/>-->
+                            <!--<Button Click="Button3_Click" HorizontalContentAlignment="Left" Content="29262 h/q" Margin="10, 0, 0, 0"/>-->
                             <Button Click="Button5_Click" HorizontalContentAlignment="Left" Content="Boshqa topilmadi" Background="DarkGray" Margin="10, 0, 0, 0"/>
                         </StackPanel>
                         <Button Content="ShHO" Background="Bisque"/>
@@ -286,11 +305,26 @@ Panel.ZIndex="1000">
                     </StackPanel>
 
                     <StackPanel Name="filtrDaraja" Visibility="Collapsed">
-                        <Button Click="Button_Click" HorizontalContentAlignment="Left" Content="AKTAHI"  Margin="0, 0, 0, 0"/>
-                        <Button Click="Button1_Click" HorizontalContentAlignment="Left" Content="71186 h/q" Margin="0, 0, 0, 0"/>
-                        <Button Click="Button2_Click" HorizontalContentAlignment="Left" Content="Markaziy aloqa uzeli" Margin="0, 0, 0, 0"/>
-                        <Button Click="Button4_Click" HorizontalContentAlignment="Left" Content="Maxsus avariya tiklash bosh." Margin="0, 0, 0, 0"/>
-                        <Button Click="Button3_Click" HorizontalContentAlignment="Left" Content="29262 h/q" Margin="0, 0, 0, 0"/>
+                        <Grid HorizontalAlignment="Left" Width="180">
+                            <Button Click="Button_Click" Width="140" HorizontalContentAlignment="Left" Content="AKTAHI"  Margin="0, 0, 40, 0"/>
+                            <Label x:Name="label01" Content="0.00%" Width="40" BorderBrush="Gray" BorderThickness="1" Height="auto" FontSize="7" HorizontalContentAlignment="Center" Background="#00ff00" FontWeight="Bold" Foreground="Blue" Margin="139, 0, 0, 0"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Left" Width="180">
+                            <Button Click="Button1_Click" Width="140" HorizontalContentAlignment="Left" Content="71186 h/q"  Margin="0, 0, 40, 0"/>
+                            <Label x:Name="label11" Content="0.00%" Width="40" BorderBrush="Gray" BorderThickness="1" Height="auto" FontSize="7" HorizontalContentAlignment="Center" Background="#00ff00" FontWeight="Bold" Foreground="Blue" Margin="139, 0, 0, 0"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Left" Width="180">
+                            <Button Click="Button2_Click" Width="140" HorizontalContentAlignment="Left" Content="Markaziy aloqa uzeli"  Margin="0, 0, 40, 0"/>
+                            <Label x:Name="label21" Content="0.00%" Width="40" BorderBrush="Gray" BorderThickness="1" Height="auto" FontSize="7" HorizontalContentAlignment="Center" Background="#00ff00" FontWeight="Bold" Foreground="Blue" Margin="139, 0, 0, 0"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Left" Width="180">
+                            <Button Click="Button4_Click" Width="140" HorizontalContentAlignment="Left" Content="Maxsus avariya tik.bosh."  Margin="0, 0, 40, 0"/>
+                            <Label x:Name="label41" Content="0.00%" Width="40" BorderBrush="Gray" BorderThickness="1" Height="auto" FontSize="7" HorizontalContentAlignment="Center" Background="#00ff00" FontWeight="Bold" Foreground="Blue" Margin="139, 0, 0, 0"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Left" Width="180">
+                            <Button Click="Button3_Click" Width="140" HorizontalContentAlignment="Left" Content="29262 h/q"  Margin="0, 0, 40, 0"/>
+                            <Label x:Name="label31" Content="0.00%" Width="40" BorderBrush="Gray" BorderThickness="1" Height="auto" FontSize="7" HorizontalContentAlignment="Center" Background="#00ff00" FontWeight="Bold" Foreground="Blue" Margin="139, 0, 0, 0"/>
+                        </Grid>
                         <Button Click="Button5_Click" HorizontalContentAlignment="Left" Content="Boshqa topilmadi" Background="DarkGray" Margin="0, 0, 0, 0"/>
                     </StackPanel>
                 </StackPanel>
